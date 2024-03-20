@@ -16,8 +16,7 @@ function getPlayerChoice() {
     return playerChoice.toLowerCase();
 }
 
-function playRound() {
-    let playerChoice = getPlayerChoice();
+function playRound(playerChoice) {
     let computerChoice = getComputerChoice();
 
     if (playerChoice === computerChoice) {
@@ -34,10 +33,10 @@ function playRound() {
     }
 }
 
-function playGame() {
-    for (let i = 0; i < 5; i++) {
-        playRound();
-    }
-}
+const buttons = document.querySelectorAll("button");
 
-playGame();
+buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+        playRound(button.id);
+    });
+});
