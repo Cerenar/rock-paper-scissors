@@ -11,28 +11,36 @@ function getComputerChoice() {
     }
 }
 
-function getPlayerChoice() {
-    let playerChoice = prompt("Rock, paper, scissors?");
-    return playerChoice.toLowerCase();
-}
-
 function playRound(playerChoice) {
     let computerChoice = getComputerChoice();
+    let resultMessage = document.createElement("p");
 
     if (playerChoice === computerChoice) {
-        console.log(`${playerChoice} = ${computerChoice}`);
-        console.log("Tie, play again!");
+        if (resultsField.children.length > 0) {
+            resultsField.removeChild(resultsField.lastChild);
+        }
+        resultMessage.textContent = "Tie, play again!";
+        resultsField.appendChild(resultMessage);
     }
-    else if ((playerChoice === "rock" && computerChoice === "scissors") || (playerChoice === "scissors" && computerChoice === "paper") || (playerChoice === "paper" && computerChoice === "rock")) {
-        console.log(`${playerChoice} > ${computerChoice}`);
-        console.log("Congrats, you win!");
+    else if ((playerChoice === "rock" && computerChoice === "scissors") || 
+    (playerChoice === "scissors" && computerChoice === "paper") || 
+    (playerChoice === "paper" && computerChoice === "rock")) {
+        if (resultsField.children.length > 0) {
+            resultsField.removeChild(resultsField.lastChild);
+        }
+        resultMessage.textContent = "Congrats, you win!";
+        resultsField.appendChild(resultMessage);
     }
     else {
-        console.log(`${playerChoice} < ${computerChoice}`);
-        console.log("Ah, too bad. Better luck next time!");
+        if (resultsField.children.length > 0) {
+            resultsField.removeChild(resultsField.lastChild);
+        }
+        resultMessage.textContent = "Ah, too bad. Better luck next time!";
+        resultsField.appendChild(resultMessage);
     }
 }
 
+const resultsField = document.querySelector("div");
 const buttons = document.querySelectorAll("button");
 
 buttons.forEach((button) => {
